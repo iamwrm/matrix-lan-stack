@@ -15,6 +15,7 @@ services:
       CONDUWUIT_TRUSTED_SERVERS: '[]'
       CONDUWUIT_ADDRESS: "0.0.0.0"
       CONDUWUIT_LOG: "info"
+      CONDUWUIT_REGISTRATION_TOKEN: ""
 
   cinny:
     image: ajbura/cinny:latest
