@@ -6,16 +6,9 @@ services:
       - "6167:6167"
     volumes:
       - conduwuit-data:/var/lib/conduwuit
+      - ./conduwuit.toml:/conduwuit.toml:ro
     environment:
-      CONDUWUIT_SERVER_NAME: ${SERVER_NAME:-matrix.lan}
-      CONDUWUIT_PORT: 6167
-      CONDUWUIT_DATABASE_PATH: /var/lib/conduwuit
-      CONDUWUIT_ALLOW_REGISTRATION: "true"
-      CONDUWUIT_ALLOW_FEDERATION: "false"
-      CONDUWUIT_TRUSTED_SERVERS: '[]'
-      CONDUWUIT_ADDRESS: "0.0.0.0"
-      CONDUWUIT_LOG: "info"
-      CONDUWUIT_YES_I_AM_VERY_VERY_SURE_I_WANT_AN_OPEN_REGISTRATION_SERVER_WITHOUT_A_TOKEN: "true"
+      CONDUWUIT_CONFIG: /conduwuit.toml
 
   cinny:
     image: ajbura/cinny:latest

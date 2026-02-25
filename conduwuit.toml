@@ -1,0 +1,9 @@
+[global]
+server_name = "matrix.lan"
+port = 6167
+database_path = "/var/lib/conduwuit"
+address = "0.0.0.0"
+allow_registration = true
+registration_token = "changeme"
+allow_federation = false
+log = "info"
