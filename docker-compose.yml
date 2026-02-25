@@ -1,0 +1,36 @@
+services:
+  conduwuit:
+    image: girlbossceo/conduwuit:latest
+    restart: unless-stopped
+    ports:
+      - "6167:6167"
+    volumes:
+      - conduwuit-data:/var/lib/conduwuit
+    environment:
+      CONDUWUIT_SERVER_NAME: ${SERVER_NAME:-matrix.lan}
+      CONDUWUIT_PORT: 6167
+      CONDUWUIT_DATABASE_PATH: /var/lib/conduwuit
+      CONDUWUIT_ALLOW_REGISTRATION: "true"
+      CONDUWUIT_ALLOW_FEDERATION: "false"
+      CONDUWUIT_TRUSTED_SERVERS: '[]'
+      CONDUWUIT_ADDRESS: "0.0.0.0"
+      CONDUWUIT_LOG: "info"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:6167/_matrix/client/versions"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  element-web:
+    image: vectorim/element-web:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./element-config.json:/app/config.json:ro
+    depends_on:
+      conduwuit:
+        condition: service_healthy
+
+volumes:
+  conduwuit-data:
