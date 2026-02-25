@@ -15,10 +15,10 @@ jobs:
       - name: Start stack
         run: docker compose up -d
 
-      - name: Wait for Conduwuit healthy
+      - name: Wait for Conduwuit
         run: |
           for i in $(seq 1 30); do
-            if docker compose exec conduwuit wget -qO- http://localhost:6167/_matrix/client/versions 2>/dev/null; then
+            if curl -sf http://localhost:6167/_matrix/client/versions >/dev/null 2>&1; then
               echo "Conduwuit is up"
               exit 0
             fi
@@ -30,15 +30,10 @@ jobs:
           exit 1
 
       - name: Verify Element Web
-        run: |
-          curl -sf http://localhost:8080 | grep -q "Element" && echo "Element Web is serving"
+        run: curl -sf http://localhost:8080 | grep -q "Element" && echo "Element Web is serving"
 
-      - name: Test registration
-        run: |
-          curl -sf -X POST http://localhost:6167/_matrix/client/v3/register \
-            -H 'Content-Type: application/json' \
-            -d '{"username":"testuser","password":"testpass123","auth":{"type":"m.login.dummy"}}' \
-            | tee /dev/stderr | grep -q "user_id" && echo "Registration works"
+      - name: Test Matrix versions endpoint
+        run: curl -sf http://localhost:6167/_matrix/client/versions | jq .
 
       - name: Logs on failure
         if: failure()

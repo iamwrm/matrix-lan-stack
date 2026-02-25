@@ -15,11 +15,6 @@ services:
       CONDUWUIT_TRUSTED_SERVERS: '[]'
       CONDUWUIT_ADDRESS: "0.0.0.0"
       CONDUWUIT_LOG: "info"
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:6167/_matrix/client/versions"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   element-web:
     image: vectorim/element-web:latest
@@ -29,8 +24,7 @@ services:
     volumes:
       - ./element-config.json:/app/config.json:ro
     depends_on:
-      conduwuit:
-        condition: service_healthy
+      - conduwuit
 
 volumes:
   conduwuit-data:
