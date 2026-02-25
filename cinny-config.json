@@ -1,5 +1,5 @@
 {
   "defaultHomeserver": 0,
-  "homeserverList": ["matrix.lan:6167"],
+  "homeserverList": ["http://127.0.0.1:6167"],
   "allowCustomHomeservers": true
 }
