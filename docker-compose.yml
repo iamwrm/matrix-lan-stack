@@ -15,7 +15,7 @@ services:
       CONDUWUIT_TRUSTED_SERVERS: '[]'
       CONDUWUIT_ADDRESS: "0.0.0.0"
       CONDUWUIT_LOG: "info"
-      CONDUWUIT_REGISTRATION_TOKEN: ""
+      CONDUWUIT_YES_I_AM_VERY_VERY_SURE_I_WANT_AN_OPEN_REGISTRATION_SERVER_WITHOUT_A_TOKEN: "true"
 
   cinny:
     image: ajbura/cinny:latest
