@@ -1,6 +1,6 @@
 services:
   conduwuit:
-    image: girlbossceo/conduwuit:latest
+    image: ghcr.io/continuwuity/continuwuity:v0.5.5
     restart: unless-stopped
     ports:
       - "6167:6167"

@@ -4,7 +4,7 @@ Self-hosted Matrix chat for internal networks.
 
 ## Stack
 
-- **Conduwuit** — lightweight Matrix homeserver (~50MB RAM)
+- **Continuwuity** (conduwuit successor) — lightweight Matrix homeserver (~50MB RAM)
 - **Element Web** — browser-based chat UI
 
 ## Quick Start
